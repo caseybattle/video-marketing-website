@@ -932,6 +932,166 @@
             letter-spacing: -0.01em;
         }
 
+        /* Contact Modal Styles */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .contact-modal-content {
+            position: relative;
+            margin: 3% auto;
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border-radius: 24px;
+            padding: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .contact-form-container {
+            padding: 2.5rem;
+            color: #333;
+        }
+
+        .contact-form-container h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .contact-form-container p {
+            color: #666;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Satoshi', sans-serif;
+            transition: border-color 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4ecdc4;
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #4ecdc4 0%, #45b7d1 100%);
+            color: white;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            font-family: 'Satoshi', sans-serif;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-close {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .contact-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .contact-modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+            
+            .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .contact-form-container h3 {
+                font-size: 1.5rem;
+            }
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -1069,6 +1229,62 @@
         </div>
     </section>
 
+    <!-- Contact Form Modal -->
+    <div id="contactModal" class="contact-modal">
+        <div class="contact-modal-content">
+            <span class="contact-close" onclick="closeContactForm()">&times;</span>
+            <div class="contact-form-container">
+                <h3 id="modalTitle">Get Started with Digital Audit</h3>
+                <p>Tell us about your business and we'll contact you within 24 hours!</p>
+                
+                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="hidden" id="selectedPlan" name="selected_plan" value="">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="last_name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">Company Name *</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Tell us about your business goals</label>
+                        <textarea id="message" name="message" rows="4" placeholder="What are you hoping to achieve with video marketing?"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">
+                        <span class="submit-text">Send Request</span>
+                        <span class="submit-loading" style="display: none;">Sending...</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Stats Section -->
     <section class="stats-section">
         <div class="stats-container">
@@ -1148,7 +1364,7 @@
                         <li>90-day action plan</li>
                         <li>Revenue opportunity report</li>
                     </ul>
-                    <button class="pricing-button" onclick="event.stopPropagation(); selectPlan('starter')">Get Started</button>
+                    <button class="pricing-button" onclick="event.stopPropagation(); openContactForm('starter')">Get Started</button>
                 </div>
                 
                 <div class="pricing-card featured" onclick="selectPlan('professional')">
@@ -1163,7 +1379,7 @@
                         <li>Performance tracking</li>
                         <li>Content calendar</li>
                     </ul>
-                    <button class="pricing-button" onclick="event.stopPropagation(); selectPlan('professional')">Get Started</button>
+                    <button class="pricing-button" onclick="event.stopPropagation(); openContactForm('professional')">Get Started</button>
                 </div>
                 
                 <div class="pricing-card" onclick="selectPlan('enterprise')">
@@ -1177,7 +1393,7 @@
                         <li>Dedicated success manager</li>
                         <li>Custom video templates</li>
                     </ul>
-                    <button class="pricing-button" onclick="event.stopPropagation(); selectPlan('enterprise')">Get Started</button>
+                    <button class="pricing-button" onclick="event.stopPropagation(); openContactForm('enterprise')">Get Started</button>
                 </div>
             </div>
         </div>
@@ -1371,89 +1587,76 @@
             window.addEventListener('scroll', updateActiveNav);
         }
 
-        // Enhanced pricing plan selection with safe Stripe integration
-        function selectPlan(planType) {
-            console.log(`Selected plan: ${planType}`);
+        // Contact form functionality
+        function openContactForm(planType) {
+            const modal = document.getElementById('contactModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const selectedPlanInput = document.getElementById('selectedPlan');
             
-            // Plan names for fallback
+            // Set the plan type
+            selectedPlanInput.value = planType;
+            
+            // Update modal title based on plan
             const planNames = {
-                'starter': 'Digital Audit ($497 one-time)',
-                'professional': 'Growth Package ($897/month)',
-                'enterprise': 'Scale Package ($1,497/month)'
+                'starter': 'Get Started with Digital Audit ($497)',
+                'professional': 'Get Started with Growth Package ($897/month)',
+                'enterprise': 'Get Started with Scale Package ($1,497/month)'
             };
             
-            const selectedPlan = planNames[planType] || planType;
+            modalTitle.textContent = planNames[planType] || 'Get Started';
             
-            // Check if Stripe is available and configured
-            if (!stripe) {
-                // Fallback when Stripe is not loaded
-                alert(`Great choice! You've selected the ${selectedPlan} plan.
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
 
-We'll contact you within 24 hours to set up payment and get started.
+        function closeContactForm() {
+            const modal = document.getElementById('contactModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-Email: aileadgenious@gmail.com
-Phone: (404) 647-4698`);
-                return;
-            }
+        // Form submission handling
+        function initContactForm() {
+            const form = document.getElementById('contactForm');
+            const submitButton = form.querySelector('.submit-button');
+            const submitText = form.querySelector('.submit-text');
+            const submitLoading = form.querySelector('.submit-loading');
             
-            // Stripe pricing configuration
-            const stripePricing = {
-                'starter': {
-                    priceId: 'price_STARTER_PRICE_ID', // Replace with your Stripe Price ID
-                    mode: 'payment' // One-time payment
-                },
-                'professional': {
-                    priceId: 'price_PROFESSIONAL_PRICE_ID', // Replace with your Stripe Price ID  
-                    mode: 'subscription' // Recurring subscription
-                },
-                'enterprise': {
-                    priceId: 'price_ENTERPRISE_PRICE_ID', // Replace with your Stripe Price ID
-                    mode: 'subscription' // Recurring subscription
-                }
-            };
-
-            const plan = stripePricing[planType];
-            if (!plan || plan.priceId.includes('PRICE_ID')) {
-                // Fallback for demo/development
-                alert(`Great choice! You've selected the ${selectedPlan} plan. 
+            form.addEventListener('submit', function(e) {
+                // Show loading state
+                submitButton.disabled = true;
+                submitText.style.display = 'none';
+                submitLoading.style.display = 'inline';
                 
-To enable instant payments:
-1. Create a Stripe account at stripe.com
-2. Add your products and get Price IDs
-3. Replace the placeholder keys in the code
-
-For now, we'll contact you to process payment manually.`);
-                return;
-            }
-
-            // Create Stripe checkout session
-            const checkoutData = {
-                mode: plan.mode,
-                line_items: [{
-                    price: plan.priceId,
-                    quantity: 1,
-                }],
-                success_url: window.location.origin + '/success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url: window.location.origin + '/cancel',
-                automatic_tax: { enabled: true },
-                billing_address_collection: 'required',
-                customer_creation: 'always',
-            };
-
-            // Add subscription-specific settings
-            if (plan.mode === 'subscription') {
-                checkoutData.subscription_data = {
-                    trial_period_days: 7, // Optional: 7-day free trial
-                };
-            }
-
-            // Redirect to Stripe Checkout
-            stripe.redirectToCheckout(checkoutData).then(function (result) {
-                if (result.error) {
-                    alert('Payment error: ' + result.error.message);
-                }
+                // Note: Form will submit to Formspree
+                // After submission, show success message
+                setTimeout(() => {
+                    alert('Thank you! We\'ll contact you within 24 hours to discuss your project.');
+                    closeContactForm();
+                    form.reset();
+                    
+                    // Reset button state
+                    submitButton.disabled = false;
+                    submitText.style.display = 'inline';
+                    submitLoading.style.display = 'none';
+                }, 1000);
             });
         }
+
+        // Close modal when clicking outside or pressing Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeContactForm();
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeContactForm();
+            }
+        });
 
         // Video watching functionality
         function watchVideo() {
